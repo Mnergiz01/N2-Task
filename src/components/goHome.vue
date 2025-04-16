@@ -1,0 +1,18 @@
+<template>
+    <router-link to="/users">
+    <div class="flex gap-2 p-2 border-b shadow-sm bg-white">
+
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 512 512">
+                <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"
+                    d="M249.38 336L170 256l79.38-80m-68.35 80H342" />
+                <path fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="32"
+                    d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192s192-86 192-192Z" />
+            </svg>
+        </div>
+        <div class="flex items-center">
+            <h1>Go Home</h1>
+        </div>
+    </div>
+    </router-link>
+</template>
