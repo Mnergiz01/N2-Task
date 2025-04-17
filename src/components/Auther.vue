@@ -22,10 +22,20 @@
   const route = useRoute()
   const userId = route.params.id
   
+
+  const isUsersPage = route.path === '/users'
+  
+
   const fetchUser = async () => {
     try {
-      const response = await axios.get(`https://jsonplaceholder.typicode.com/users/${userId}`)
-      user.value = response.data
+      
+      if (!isUsersPage && userId) {
+        const response = await axios.get(`https://jsonplaceholder.typicode.com/users/${userId}`)
+        user.value = response.data
+      } else {
+        
+        console.log("Kullanıcı verisi sadece detay sayfasında yüklenir.")
+      }
     } catch (error) {
       console.error('Kullanıcı verisi alınırken hata oluştu:', error)
     }

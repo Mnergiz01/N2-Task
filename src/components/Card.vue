@@ -1,9 +1,8 @@
 <template>
-  <div
-    @click="handleCardClick"
+  <div @click="handleCardClick"
     class="cursor-pointer p-6 border rounded-2xl shadow-md bg-white flex flex-col gap-6 w-full max-w-md transition-transform duration-500 ease-in-out transform hover:-translate-y-2 hover:shadow-2xl">
+
     
-    <!-- Üst Bilgiler -->
     <div class="flex items-center gap-4">
       <img class="w-20 h-20 rounded-full object-cover" :src="`https://i.pravatar.cc/150?img=${user.id}`" alt="Avatar" />
       <div>
@@ -13,10 +12,10 @@
       </div>
     </div>
 
-    <!-- Diğer Bilgiler -->
+
     <div class="flex flex-col gap-4 text-sm text-gray-700">
 
-      <!-- Location -->
+      
       <div v-if="user.address">
         <div class="flex items-center gap-2 font-medium text-gray-800">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
@@ -31,7 +30,7 @@
         <p class="ms-6">{{ user.address.city }} / {{ user.address.zipcode }}</p>
       </div>
 
-      <!-- Company -->
+      
       <div v-if="user.company">
         <div class="flex items-center gap-2 font-medium text-gray-800">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
@@ -44,7 +43,7 @@
         <p class="ms-6 text-gray-500 italic">"{{ user.company.catchPhrase }}"</p>
       </div>
 
-      <!-- Website -->
+      
       <div>
         <div class="flex items-center gap-2 font-medium text-gray-800">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 2048 2048">
@@ -71,15 +70,7 @@ const props = defineProps({
 
 const router = useRouter()
 
-const handleCardClick = async () => {
-  try {
-    const { data } = await axios.get(`https://jsonplaceholder.typicode.com/users/${props.user.id}`)
-    console.log('Kullanıcı detayları:', data)
-
-    // Detay sayfasına yönlendir
-    router.push(`/todos/${props.user.id}`)
-  } catch (error) {
-    console.error('Kullanıcı verisi alınamadı:', error)
-  }
+const handleCardClick = () => {
+  router.push(`/todos/${props.user.id}`)
 }
 </script>

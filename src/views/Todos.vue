@@ -12,7 +12,7 @@
             <input
               type="checkbox"
               :checked="todo.completed"
-              disabled
+              @change="toggleCompleted(todo)"
               class="mt-1 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
             />
             <p class="text-gray-800 text-sm leading-relaxed">
@@ -33,13 +33,36 @@ import goHome from '@/components/goHome.vue'
 
 const route = useRoute()
 const userId = route.params.id
-
 const todos = ref([])
+
+
+const getCompletedFromStorage = () => {
+  const saved = localStorage.getItem(`completedTodos-${userId}`)
+  return saved ? JSON.parse(saved) : []
+}
+
+
+const saveCompletedToStorage = () => {
+  const completedIds = todos.value.filter(todo => todo.completed).map(todo => todo.id)
+  localStorage.setItem(`completedTodos-${userId}`, JSON.stringify(completedIds))
+}
+
+
+const toggleCompleted = (todo) => {
+  todo.completed = !todo.completed
+  saveCompletedToStorage()
+}
 
 onMounted(async () => {
   try {
     const res = await axios.get(`https://jsonplaceholder.typicode.com/todos?userId=${userId}`)
-    todos.value = res.data
+    const storedCompleted = getCompletedFromStorage()
+
+    // API'den gelen verileri localStorage durumuna göre güncelle
+    todos.value = res.data.map(todo => ({
+      ...todo,
+      completed: storedCompleted.includes(todo.id)
+    }))
   } catch (err) {
     console.error('Todos alınamadı:', err)
   }

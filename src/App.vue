@@ -1,8 +1,8 @@
 <template>
   <div class="flex min-h-screen">
-    <!-- Sidebar Toggle Button (mobil) -->
+    
     <Sidebar></Sidebar>
-    <!-- Main Content -->
+    
     <main class="flex flex-col flex-1 min-h-screen p-10">
       
       <div>
