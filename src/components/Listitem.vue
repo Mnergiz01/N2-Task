@@ -42,7 +42,7 @@
 import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import axios from 'axios'
-import Auther from '@/components/Auther.vue'
+import Auther from '@/components/Authercomponents/Auther.vue'
 
 
 const Menuitem1 = ref(['Users'])

@@ -35,7 +35,7 @@ const routes = [
   {
     path: '/album/:id',
     name: 'AlbumDetails',
-    component: () => import('@/components/AlbumDetails.vue'),
+    component: () => import('@/components/Albumcomponents/AlbumDetails.vue'),
   }
   
 ]

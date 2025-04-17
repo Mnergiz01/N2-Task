@@ -18,7 +18,7 @@
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import { useRouter } from 'vue-router'
-import AlbumCard from '@/components/AlbumCard.vue'
+import AlbumCard from '@/components/Albumcomponents/AlbumCard.vue'
 import goHome from '@/components/goHome.vue'
 
 const albums = ref([])

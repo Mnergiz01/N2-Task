@@ -43,7 +43,6 @@
             </div>
           </div>
         </div>
-
         <!-- Close Modal Button -->
         <button
           class="absolute top-3 right-3 text-gray-400 hover:text-gray-600"

@@ -14,8 +14,8 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import axios from "axios";
-import Card from "@/components/Card.vue";
-import Title from "@/components/Title.vue";
+import Card from "@/components/Usercomponents/Card.vue";
+import Title from "@/components/Todoscomponents/Title.vue";
 
 const users = ref([]);
 

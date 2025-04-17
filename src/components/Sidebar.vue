@@ -15,7 +15,7 @@
 </template>
 <script setup>
 import n2logo from '@/assets/n2logo.png'
-import Title from '@/components/Title.vue'
+import Title from '@/components/Todoscomponents/Title.vue'
 import Listitem from '@/components/Listitem.vue'
 
 </script>
