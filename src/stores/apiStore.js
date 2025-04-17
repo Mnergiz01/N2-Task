@@ -4,14 +4,15 @@ import { ref } from 'vue'
 import axios from 'axios'
 
 export const useApiStore = defineStore('api', () => {
-  // State
+  
   const todos = ref([])
   const users = ref([])
   const posts = ref([])
-  const actorDetails = ref(null)
-  const news = ref([])
+  const albums = ref([])  
+  const photos = ref([])  
+  const userDetail = ref(null)
 
-  // Actions
+ 
   const fetchTodos = async (userId) => {
     const res = await axios.get(`https://jsonplaceholder.typicode.com/todos?userId=${userId}`)
     todos.value = res.data
@@ -27,27 +28,29 @@ export const useApiStore = defineStore('api', () => {
     posts.value = res.data
   }
 
-  const fetchActorDetails = async (actorId) => {
-    const res = await axios.get(`https://api.themoviedb.org/3/person/${actorId}?api_key=YOUR_API_KEY`)
-    actorDetails.value = res.data
+  const fetchAlbums = async () => {
+    const res = await axios.get('https://jsonplaceholder.typicode.com/albums')
+    albums.value = res.data
   }
 
-  const fetchNews = async () => {
-    const res = await axios.get(`https://newsapi.org/v2/top-headlines?country=us&apiKey=YOUR_API_KEY`)
-    news.value = res.data.articles
+  const fetchPhotos = async () => {
+    const res = await axios.get('https://jsonplaceholder.typicode.com/photos')
+    photos.value = res.data
   }
 
-  // Return everything you want to expose
+  const fetchUserDetail = async (userId) => {
+    const res = await axios.get(`https://jsonplaceholder.typicode.com/users/${userId}`)
+    userDetail.value = res.data
+  }
+
   return {
-    todos,
-    users,
-    posts,
-    actorDetails,
-    news,
+    albums,
+    photos,
     fetchTodos,
     fetchUsers,
     fetchPosts,
-    fetchActorDetails,
-    fetchNews
+    fetchAlbums,
+    fetchPhotos,
+    fetchUserDetail
   }
 })
