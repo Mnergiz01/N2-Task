@@ -6,6 +6,7 @@ import Todos from '@/views/Todos.vue'
 import Posts from '@/views/Posts.vue'
 import Albums from '@/views/Albums.vue'
 
+
 const routes = [
   {
     path: '/',
@@ -17,20 +18,26 @@ const routes = [
     component: Users
   },
   {
-    path: '/todos',
+    path: '/todos/:id',
     name: 'Todos',
     component: Todos
   },
   {
-    path: '/posts',
+    path: '/posts/:id',
     name: 'Posts',
     component: Posts
   },
   {
-    path: '/albums',
+    path: '/albums/:id',
     name: 'Albums',
     component: Albums
+  },
+  {
+    path: '/album/:id',
+    name: 'AlbumDetails',
+    component: () => import('@/components/AlbumDetails.vue'),
   }
+  
 ]
 
 const router = createRouter({
