@@ -1,3 +1,12 @@
+import { createRouter, createWebHistory } from 'vue-router'
+
+// Sayfa bileşenlerini import et
+import Users from '@/views/Users.vue'
+import Todos from '@/views/Todos.vue'
+import Posts from '@/views/Posts.vue'
+import Albums from '@/views/Albums.vue'
+import AlbumDetails from '@/components/AlbumComponents/AlbumDetails.vue'
+
 const routes = [
   {
     path: '/',
@@ -19,13 +28,21 @@ const routes = [
     component: Posts
   },
   {
-    path: '/albums',
+    path: '/albums/:id',
     name: 'Albums',
     component: Albums
   },
   {
-    path: '/album/:id',
+    path: '/albums/:id',
     name: 'AlbumDetails',
     component: AlbumDetails
   }
+  
 ]
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes
+})
+
+export default router
