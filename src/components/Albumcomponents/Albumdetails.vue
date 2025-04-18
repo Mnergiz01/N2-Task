@@ -24,7 +24,7 @@
   import { useRoute } from 'vue-router'
   import { ref, onMounted } from 'vue'
   import axios from 'axios'
-  import goHome from '@/components/goHome.vue'
+  import goHome from '@/components/gohome.vue'
   
   const route = useRoute()
   const albumId = route.params.id

@@ -18,8 +18,8 @@
 import { onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useApiStore } from '@/stores/apiStore'
-import AlbumCard from '@/components/albumcomponents/AlbumCard.vue'
-import goHome from '@/components/goHome.vue'
+import AlbumCard from '@/components/albumcomponents/albumcard.vue'
+import goHome from '@/components/gohome.vue'
 
 const apiStore = useApiStore()
 const router = useRouter()

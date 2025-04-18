@@ -14,7 +14,7 @@
 
 <script setup>
 
-import Sidebar from '@/components/Sidebarcomponents/Sidebar.vue'
+import Sidebar from '@/components/sidebarcomponents/sidebar.vue'
 
 </script>
 

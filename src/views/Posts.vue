@@ -15,8 +15,8 @@
 import { onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useApiStore } from '@/stores/apiStore'
-import goHome from '@/components/goHome.vue'
-import PostsCard from '@/components/postcomponents/PostsCard.vue'
+import goHome from '@/components/gohome.vue'
+import PostsCard from '@/components/postcomponents/postscard.vue'
 
 const route = useRoute()
 const userId = route.params.id

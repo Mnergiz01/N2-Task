@@ -43,7 +43,7 @@
 import { ref, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 
-import Auther from '@/components/Authercomponents/Auther.vue'
+import Auther from '@/components/authercomponents/auther.vue'
 
 
 const Menuitem1 = ref(['Users'])

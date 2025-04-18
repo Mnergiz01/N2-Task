@@ -26,5 +26,5 @@
 
 <script setup>
 import n2logo from '@/assets/n2logo.png'
-import Listitem from '@/components/Sidebarcomponents/Listitem.vue'
+import Listitem from '@/components/sidebarcomponents/listitem.vue'
 </script>

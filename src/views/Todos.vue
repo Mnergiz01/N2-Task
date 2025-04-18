@@ -29,7 +29,7 @@
 import { onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useApiStore } from '@/stores/apiStore'
-import goHome from '@/components/goHome.vue'
+import goHome from '@/components/gohome.vue'
 
 const route = useRoute()
 const userId = route.params.id

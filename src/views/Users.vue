@@ -14,8 +14,8 @@
 <script setup>
 import { onMounted, computed } from 'vue'
 import { useApiStore } from '@/stores/apiStore'
-import Card from '@/components/usercomponents/Card.vue'
-import Title from '@/components/todoscomponents/Title.vue'
+import Card from '@/components/usercomponents/card.vue'
+import Title from '@/components/todoscomponents/title.vue'
 
 const apiStore = useApiStore()
 const users = computed(() => apiStore.users)
