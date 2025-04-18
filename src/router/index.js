@@ -5,7 +5,7 @@ import Users from '@/views/Users.vue'
 import Todos from '@/views/Todos.vue'
 import Posts from '@/views/Posts.vue'
 import Albums from '@/views/Albums.vue'
-import AlbumDetails from '@/components/AlbumComponents/AlbumDetails.vue'
+import AlbumDetails from '@/components/albumcomponents/albumdetails.vue'
 
 const routes = [
   {
