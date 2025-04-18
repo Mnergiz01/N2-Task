@@ -5,7 +5,7 @@ import Users from '@/views/Users.vue'
 import Todos from '@/views/Todos.vue'
 import Posts from '@/views/Posts.vue'
 import Albums from '@/views/Albums.vue'
-
+import AlbumDetails from '@/components/AlbumComponents/AlbumDetails.vue'
 
 const routes = [
   {
@@ -35,7 +35,7 @@ const routes = [
   {
     path: '/album/:id',
     name: 'AlbumDetails',
-    component: () => import('@/components/Albumcomponents/AlbumDetails.vue'),
+    component: AlbumDetails
   }
   
 ]
