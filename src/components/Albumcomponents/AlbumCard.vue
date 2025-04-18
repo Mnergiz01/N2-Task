@@ -47,7 +47,7 @@ const goToAlbumDetails = () => {
     opacity: 1;
     transform: translateY(0);
   }
-}
+}z
 
 .animate-fade-in {
   animation: fade-in 0.4s ease-in;

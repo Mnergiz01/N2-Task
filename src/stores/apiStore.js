@@ -77,8 +77,32 @@ export const useApiStore = defineStore("api", () => {
       }
     }
   };
+  const fetchAlbumsByUser = async (userId) => {
+    try {
+      const res = await axios.get(
+        `https://jsonplaceholder.typicode.com/albums?userId=${userId}`
+      );
+      albums.value = res.data;
+    } catch (error) {
+      console.error("Kullanıcıya ait albümler alınırken hata oluştu:", error);
+    }
+  };
+  
+  const fetchPhotosByAlbum = async (albumId) => {
+    try {
+      const res = await axios.get(
+        `https://jsonplaceholder.typicode.com/photos?albumId=${albumId}`
+      );
+      photos.value = res.data;
+    } catch (error) {
+      console.error("Albüm fotoğrafları alınırken hata oluştu:", error);
+    }
+  };
+  
 
   return {
+    fetchPhotosByAlbum,
+    fetchAlbumsByUser,
     albums,
     photos,
     posts,
