@@ -14,35 +14,30 @@
   </template>
   
   <script setup>
-  import { ref, onMounted } from 'vue'
+  import { ref, watch,onMounted } from 'vue'
   import { useRoute } from 'vue-router'
   import axios from 'axios'
-  
   const user = ref(null)
   const route = useRoute()
-  const userId = route.params.id
   
-
-  const isUsersPage = route.path === '/users'
   
-
   const fetchUser = async () => {
     try {
-      
-      if (!isUsersPage && userId) {
+      const userId = route.params.id
+      if (userId) {
         const response = await axios.get(`https://jsonplaceholder.typicode.com/users/${userId}`)
         user.value = response.data
-      } else {
-        
-        console.log("Kullanıcı verisi sadece detay sayfasında yüklenir.")
       }
     } catch (error) {
-      console.error('Kullanıcı verisi alınırken hata oluştu:', error)
+      console.error('Hata:', error)
     }
   }
   
-  onMounted(() => {
-    fetchUser()
-  })
+  onMounted(fetchUser)
+  
+  watch(() => route.params.id, fetchUser)
+  
+  
   </script>
+  
   

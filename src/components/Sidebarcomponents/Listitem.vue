@@ -39,7 +39,7 @@
 
 
 <script setup>
-import { ref } from 'vue'
+import { ref,onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import axios from 'axios'
 import Auther from '@/components/Authercomponents/Auther.vue'
@@ -76,4 +76,5 @@ const isActive = (item) => {
   const itemName = item.toLowerCase()
   return pathSegments.includes(itemName)
 }
+
 </script>
