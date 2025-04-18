@@ -26,45 +26,22 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
-import axios from 'axios'
+import { useApiStore } from '@/stores/apiStore'
 import goHome from '@/components/goHome.vue'
 
 const route = useRoute()
 const userId = route.params.id
-const todos = ref([])
-
-
-const getCompletedFromStorage = () => {
-  const saved = localStorage.getItem(`completedTodos-${userId}`)
-  return saved ? JSON.parse(saved) : []
-}
-
-
-const saveCompletedToStorage = () => {
-  const completedIds = todos.value.filter(todo => todo.completed).map(todo => todo.id)
-  localStorage.setItem(`completedTodos-${userId}`, JSON.stringify(completedIds))
-}
-
+const apiStore = useApiStore()
+const todos = computed(() => apiStore.todos)
 
 const toggleCompleted = (todo) => {
   todo.completed = !todo.completed
-  saveCompletedToStorage()
+  apiStore.updateLocalCompleted(userId, todos.value)
 }
 
 onMounted(async () => {
-  try {
-    const res = await axios.get(`https://jsonplaceholder.typicode.com/todos?userId=${userId}`)
-    const storedCompleted = getCompletedFromStorage()
-
-    // API'den gelen verileri localStorage durumuna göre güncelle
-    todos.value = res.data.map(todo => ({
-      ...todo,
-      completed: storedCompleted.includes(todo.id)
-    }))
-  } catch (err) {
-    console.error('Todos alınamadı:', err)
-  }
+  await apiStore.fetchTodos(userId)
 })
 </script>

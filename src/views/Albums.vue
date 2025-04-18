@@ -15,50 +15,44 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import axios from 'axios'
+import { onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { useApiStore } from '@/stores/apiStore'
 import AlbumCard from '@/components/Albumcomponents/AlbumCard.vue'
 import goHome from '@/components/goHome.vue'
 
-const albums = ref([])
-const albumPhotos = ref({})
+const apiStore = useApiStore()
 const router = useRouter()
 
-onMounted(async () => {
-    try {
-
-        const albumsRes = await axios.get('https://jsonplaceholder.typicode.com/albums')
-        albums.value = albumsRes.data
-
-
-        try {
-            const photosRes = await axios.get('https://jsonplaceholder.typicode.com/photos')
-            const allPhotos = photosRes.data
-
-            const grouped = {}
-            allPhotos.forEach(photo => {
-                if (!grouped[photo.albumId]) {
-                    grouped[photo.albumId] = []
-                }
-                if (grouped[photo.albumId].length < 4) {
-                    grouped[photo.albumId].push(photo)
-                }
-            })
-
-            albumPhotos.value = grouped
-        } catch (error) {
-            console.warn('Fotoğraflar alınamadı, ancak uygulama devam ediyor.', error)
-            // Fotoğraflar alınamadığında, boş bir değer ile devam edebiliriz
-            albumPhotos.value = {}
-        }
-
-    } catch (error) {
-        console.error('Albüm verileri alınamadı:', error)
+const albums = computed(() => apiStore.albums)
+const albumPhotos = computed(() => {
+  const grouped = {}
+  apiStore.photos.forEach(photo => {
+    if (!grouped[photo.albumId]) {
+      grouped[photo.albumId] = []
     }
+    if (grouped[photo.albumId].length < 4) {
+      grouped[photo.albumId].push(photo)
+    }
+  })
+  return grouped
+})
+
+onMounted(async () => {
+  try {
+    await apiStore.fetchAlbums()
+  } catch (err) {
+    console.error('Albüm verileri alınamadı:', err)
+  }
+
+  try {
+    await apiStore.fetchPhotos()
+  } catch (err) {
+    console.warn('Fotoğraflar alınamadı, ancak uygulama devam ediyor.', err)
+  }
 })
 
 const goToAlbumDetails = (album) => {
-    router.push({ name: 'AlbumDetails', params: { id: album.id } })
+  router.push({ name: 'AlbumDetails', params: { id: album.id } })
 }
 </script>

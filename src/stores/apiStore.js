@@ -1,21 +1,34 @@
-// src/stores/apiStore.js
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import axios from 'axios'
 
 export const useApiStore = defineStore('api', () => {
-  
   const todos = ref([])
   const users = ref([])
   const posts = ref([])
   const albums = ref([])  
   const photos = ref([])  
   const userDetail = ref(null)
+  const userPosts = ref([])
 
- 
+  // Todos'u localStorage ile birlikte al
   const fetchTodos = async (userId) => {
     const res = await axios.get(`https://jsonplaceholder.typicode.com/todos?userId=${userId}`)
-    todos.value = res.data
+    const saved = localStorage.getItem(`completedTodos-${userId}`)
+    const storedCompleted = saved ? JSON.parse(saved) : []
+
+    todos.value = res.data.map(todo => ({
+      ...todo,
+      completed: storedCompleted.includes(todo.id)
+    }))
+  }
+
+  const updateLocalCompleted = (userId, currentTodos) => {
+    const completedIds = currentTodos
+      .filter(todo => todo.completed)
+      .map(todo => todo.id)
+
+    localStorage.setItem(`completedTodos-${userId}`, JSON.stringify(completedIds))
   }
 
   const fetchUsers = async () => {
@@ -26,6 +39,11 @@ export const useApiStore = defineStore('api', () => {
   const fetchPosts = async () => {
     const res = await axios.get(`https://jsonplaceholder.typicode.com/posts`)
     posts.value = res.data
+  }
+
+  const fetchPostsByUser = async (userId) => {
+    const res = await axios.get(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`)
+    userPosts.value = res.data
   }
 
   const fetchAlbums = async () => {
@@ -46,9 +64,16 @@ export const useApiStore = defineStore('api', () => {
   return {
     albums,
     photos,
+    posts,
+    userPosts,
+    todos,
+    users,
+    userDetail,
     fetchTodos,
+    updateLocalCompleted,
     fetchUsers,
     fetchPosts,
+    fetchPostsByUser,
     fetchAlbums,
     fetchPhotos,
     fetchUserDetail

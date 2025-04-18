@@ -12,20 +12,21 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import axios from "axios";
-import Card from "@/components/Usercomponents/Card.vue";
-import Title from "@/components/Todoscomponents/Title.vue";
+import { onMounted, computed } from 'vue'
+import { useApiStore } from '@/stores/apiStore'
+import Card from '@/components/Usercomponents/Card.vue'
+import Title from '@/components/Todoscomponents/Title.vue'
 
-const users = ref([]);
+const apiStore = useApiStore()
+const users = computed(() => apiStore.users)
 
 onMounted(async () => {
-  try {
-    const { data } = await axios.get('https://jsonplaceholder.typicode.com/users');
-    users.value = data;
-    console.log(users.value);
-  } catch (error) {
-    console.error("Veri çekme hatası:", error);
+  if (users.value.length === 0) {
+    try {
+      await apiStore.fetchUsers()
+    } catch (error) {
+      console.error("Veri çekme hatası:", error)
+    }
   }
-});
+})
 </script>
